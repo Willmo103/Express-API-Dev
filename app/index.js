@@ -13,7 +13,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Methods", "GET", "PUT", "POST", "DELETE")
     next()
 });
-app.use(morgan("normal"));
+app.use(morgan('common'));
 app.use('/dev', require('./routes/dev'));
 app.use('/users', require('./routes/users'));
 
@@ -25,11 +25,11 @@ app.use('/users', require('./routes/users'));
             { force: false }
         );
             console.log("Tables Created!");
-        app.listen(process.env.EXTERNAL_PORT || 5001, () => {
-            console.log("Server Listening: http://localhost:5001");
+        app.listen(process.env.EXTERNAL_PORT || 5000, () => {
+            console.log("Server Listening: http://localhost:5000");
         })
     } catch (error) {
-        console.log(error);
+        console.log("Error! Unable to build database: ", error);
     }
 
 })() 

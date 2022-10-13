@@ -21,6 +21,7 @@ exports.getOne = async (req, res, next) => {
 
 exports.createOne = async (req, res, next) => {
     try {
+        console.log(req.body.json())
         const USER_MODEL = {
             username: req.body.username,
             email: req.body.email,
@@ -29,6 +30,12 @@ exports.createOne = async (req, res, next) => {
             lastName: req.body.lastName,
             address: req.user.address,
             shippingAddress: req.user.shippingAddress
+        }
+        try {
+            const user = await User.create(USER_MODEL);
+            return res.status(201).json(user);
+        } catch (error) {
+            return res.status(500).json(error);
         }
     } catch (error) {
         return res.status(500).json(error);
