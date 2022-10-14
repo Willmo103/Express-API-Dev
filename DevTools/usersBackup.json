@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "username": "NuMbErOnEtEsT",
+    "email": "TestMeSon@test.com",
+    "password": "12345",
+    "firstName": "T.",
+    "lastName": "Est",
+    "address": "1234 3rd st. Anytown, IA 72727",
+    "shippingAddress": "1234 3rd st. Anytown, IA 72727",
+    "createdAt": "2022-10-14T08:04:20.298Z",
+    "updatedAt": "2022-10-14T08:04:20.298Z"
+  },
+  {
+    "id": 2,
+    "username": "Xx-test-2-xX",
+    "email": "test@test.com",
+    "password": "12345",
+    "firstName": "Test-y",
+    "lastName": "Tester-son",
+    "address": "1234 5th st. LazyVille, CA 72727",
+    "shippingAddress": "1234 5th st. LazyVille, CA 72727",
+    "createdAt": "2022-10-14T08:05:19.740Z",
+    "updatedAt": "2022-10-14T08:05:19.740Z"
+  },
+  {
+    "id": 3,
+    "username": "Rudy5151",
+    "email": "r.udie@test.com",
+    "password": "12345",
+    "firstName": "Rudy",
+    "lastName": "Tucker",
+    "address": "1556 FreeCountry rd. NowheresVille, KS 72757",
+    "shippingAddress": "1556 FreeCountry rd. NowheresVille, KS 72757",
+    "createdAt": "2022-10-14T08:07:40.522Z",
+    "updatedAt": "2022-10-14T08:07:40.522Z"
+  }
+]

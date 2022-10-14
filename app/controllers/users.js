@@ -1,71 +1,114 @@
 const User = require("../models/users");
 
 exports.getAll = async (req, res, next) => {
-    try {
-        const ALL = await User.findAll()
-        return res.status(200).json(ALL)
-    } catch (error) {
-        return res.status(500).json(error)
-    }
-}
+  try {
+    const ALL = await User.findAll();
+    return res.status(200).json(ALL);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
 exports.getOne = async (req, res, next) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        return res.status(200).json(user)
-    } catch (error) {
-        return res.status(500).json(error);
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        status: "failed",
+        reason: `user with id: ${req.params.id} does not exist.`,
+      });
     }
-}
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
 exports.createOne = async (req, res, next) => {
-    try {
-        const USER_MODEL = {
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            address: req.body.address,
-            shippingAddress: req.body.shippingAddress,
-        }
-        try {
-            const user = await User.create(USER_MODEL);
-            return res.status(201).json(user);
-        } catch (error) {
-            return res.status(500).json(error);
-        }
-    } catch (error) {
-        return res.status(500).json(error);
+  try {
+    const user = await User.findOne({ where: { username: req.body.username } });
+    if (user) {
+      return res.status(409).json({
+        status: "conflict",
+        reason: `user with id: ${req.body.username} already exists.`,
+      });
     }
-}
+    try {
+      const USER_MODEL = {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        address: req.body.address,
+        shippingAddress: req.body.shippingAddress,
+      };
+      try {
+        const user = await User.create(USER_MODEL);
+        return res.status(201).json(user);
+      } catch (error) {
+        return res.status(500).json(error);
+      }
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
 exports.deleteOne = async (req, res, next) => {
-    try {
-        const user = await User.destroy({ where: { id: req.params.id } })
-        return res.status(200).json(user)
-    } catch (error) {
-        return res.status(500).json(error)
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        status: "failed",
+        reason: `user with id: ${req.params.id} does not exist.`,
+      });
     }
-}
+    try {
+      const user = await User.destroy({ where: { id: req.params.id } });
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
 exports.updateOne = async (req, res, next) => {
-    try {
-        const USER_MODEL = {
-          username: req.body.username,
-          email: req.body.email,
-          password: req.body.password,
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          address: req.body.address,
-          shippingAddress: req.body.shippingAddress,
-        };
-
-        try {
-            const user = await User.update(USER_MODEL, {where: { id: req.params.id }})
-            return res.status(200).json(user)
-        } catch (error) {}
-    } catch (error) {
-        return res.status(500).json(error)
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        status: "failed",
+        reason: `user with id: ${req.params.id} does not exist.`,
+      });
     }
-}
+    try {
+      const USER_MODEL = {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        address: req.body.address,
+        shippingAddress: req.body.shippingAddress,
+      };
+
+      try {
+        const user = await User.update(USER_MODEL, {
+          where: { id: req.params.id },
+        });
+        return res.status(200).json(user);
+      } catch (error) {
+        return res.status(500).json(error);
+      }
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};

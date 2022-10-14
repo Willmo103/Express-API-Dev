@@ -39,4 +39,7 @@ const User = db.define("users", {
   },
 });
 
-module.exports = User
+// TODO: add bio field
+// TODO: setup reviews Foreign key for Reviews
+// TODO: add a field for a subtitle section
+module.exports = User;

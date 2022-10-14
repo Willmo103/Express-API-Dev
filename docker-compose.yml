@@ -3,7 +3,7 @@ version: '3.8'
 services:
   node_backend:
     container_name: express_api
-    image: express-api-test0.0.3
+    image: express-api-test0.0.5
     build:
       context: .
     ports: ["5000:5000"]
