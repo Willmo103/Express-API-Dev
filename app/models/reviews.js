@@ -36,3 +36,11 @@ const Review = db.define("reviews", {
 });
 
 module.exports = Review;
+/*
+id: req.body.id,
+owner_id: req.body.owner_id,
+title: req.body.title,
+content: req.body.content,
+rating: req.body.rating,
+recommend: req.body.recommend
+*/
