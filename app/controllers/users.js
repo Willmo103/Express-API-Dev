@@ -5,7 +5,6 @@ exports.getAll = async (req, res, next) => {
         const ALL = await User.findAll()
         return res.status(200).json(ALL)
     } catch (error) {
-        console.log(error);
         return res.status(500).json(error)
     }
 }
@@ -13,7 +12,7 @@ exports.getAll = async (req, res, next) => {
 exports.getOne = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.params.id);
-        return res.status(200).json(User)
+        return res.status(200).json(user)
     } catch (error) {
         return res.status(500).json(error);
     }
@@ -21,15 +20,14 @@ exports.getOne = async (req, res, next) => {
 
 exports.createOne = async (req, res, next) => {
     try {
-        console.log(req.body.json())
         const USER_MODEL = {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            address: req.user.address,
-            shippingAddress: req.user.shippingAddress
+            address: req.body.address,
+            shippingAddress: req.body.shippingAddress,
         }
         try {
             const user = await User.create(USER_MODEL);
@@ -44,7 +42,7 @@ exports.createOne = async (req, res, next) => {
 
 exports.deleteOne = async (req, res, next) => {
     try {
-        const user = await user.destroy({ where: { id: req.params.id } })
+        const user = await User.destroy({ where: { id: req.params.id } })
         return res.status(200).json(user)
     } catch (error) {
         return res.status(500).json(error)
@@ -59,8 +57,8 @@ exports.updateOne = async (req, res, next) => {
           password: req.body.password,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          address: req.user.address,
-          shippingAddress: req.user.shippingAddress,
+          address: req.body.address,
+          shippingAddress: req.body.shippingAddress,
         };
 
         try {
