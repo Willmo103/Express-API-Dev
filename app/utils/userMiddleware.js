@@ -49,3 +49,42 @@ exports.buildNewUserModel = async (req, res) => {
     return res.status(500).json(error);
   }
 };
+
+exports.getUserTokenId = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        username: req.user.name,
+      },
+    });
+    return user.id;
+  } catch (error) {
+    res.send(500).json(error);
+  }
+};
+
+exports.getUsernameFromId = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    return user.username;
+  } catch (error) {
+    res.send(500).json(error);
+  }
+};
+
+// exports.getUserIdFromPath = async (req, rex){
+//   try {
+//     const user = await User.findOne({
+//       where: {
+//         : req.user.name,
+//       },
+//     });
+//     return user.id;
+//   } catch (error) {
+//     res.send(500).json(error);
+//   }
+// }
