@@ -32,10 +32,12 @@ exports.getAllById = async (req, res) => {
 exports.getOne = async (req, res) => {
   try {
     await checkReviewNull(req, res);
-    const review = await Review.findOne({
-      where: { id: req.params.id },
-    });
-    return res.status(200).json(review);
+    try {
+      const review = await Review.findOne({
+        where: { id: req.params.id },
+      });
+      return res.status(200).json(review);
+    } catch (error) {}
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -44,9 +46,11 @@ exports.getOne = async (req, res) => {
 exports.createOne = async (req, res) => {
   try {
     await checkReviewNull(req, res);
-    const REVIEW_MODEL = await buildReviewModel(rew, res);
-    const review = await Review.create(REVIEW_MODEL);
-    return res.status(201).json(review);
+    const REVIEW_MODEL = buildReviewModel(rew, res);
+    try {
+      const review = await Review.create(REVIEW_MODEL);
+      return res.status(201).json(review);
+    } catch (error) {}
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -55,11 +59,15 @@ exports.createOne = async (req, res) => {
 exports.deleteOne = async (req, res) => {
   try {
     await checkReviewNull(req, res);
-    const review = await Review.destroy({
-      where: { id: req.params.id },
-    });
-    return res.status(200).json({ status: "Review deleted", data: review });
+    try {
+      const review = await Review.destroy({
+        where: { id: req.params.id },
+      });
+      return res.status(200).json({ status: "Review deleted", data: review });
+    } catch (error) {}
+    console.log(error);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
@@ -67,12 +75,16 @@ exports.deleteOne = async (req, res) => {
 exports.updateOne = async (req, res) => {
   try {
     await reviewVerifyExists(req, res);
-    const REVIEW_MODEL = await buildReviewModel(rew, res);
-    const review = await Review.update(REVIEW_MODEL, {
-      where: { id: req.params.id },
-    });
-    return res.status(200).json(review);
+    const REVIEW_MODEL = buildReviewModel(rew, res);
+    try {
+      const review = await Review.update(REVIEW_MODEL, {
+        where: { id: req.params.id },
+      });
+      return res.status(200).json(review);
+    } catch (error) {}
+    console.log(error);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };

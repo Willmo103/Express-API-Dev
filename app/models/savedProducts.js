@@ -8,8 +8,7 @@ const Saved = db.define("savedProducts", {
     type: Sequelize.STRING,
     references: {
       model: User,
-      key: User.username,
-      deferrable: Deferrable.INITIALLY_IMMEDIATE,
+      key: "username",
     },
     primaryKey: true,
     allowNull: false,
@@ -18,8 +17,7 @@ const Saved = db.define("savedProducts", {
     type: Sequelize.INTEGER,
     references: {
       model: Product,
-      key: Product.id,
-      deferrable: Deferrable.INITIALLY_IMMEDIATE,
+      key: "id",
     },
     primaryKey: true,
     allowNull: false,

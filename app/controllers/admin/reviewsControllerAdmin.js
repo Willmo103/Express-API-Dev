@@ -1,10 +1,11 @@
-const Review = require("../models/reviews");
+const Review = require("../../models/reviews");
 
 exports.getAll = async (req, res, next) => {
   try {
     const ALL = await Review.findAll();
     return res.status(200).json(ALL);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
@@ -22,9 +23,11 @@ exports.deleteOne = async (req, res, next) => {
       const review = await Review.destroy({ where: { id: req.params.id } });
       return res.status(200).json(review);
     } catch (error) {
+      console.log(error);
       return res.status(500).json(error);
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };

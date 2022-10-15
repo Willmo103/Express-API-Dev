@@ -1,4 +1,4 @@
-const { getOne, getAll } = require("../controllers/products");
+const { getOne, getAll } = require("../controllers/productsController");
 const router = require("express").Router();
 
 //R

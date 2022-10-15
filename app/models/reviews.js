@@ -14,8 +14,7 @@ const Review = db.define("reviews", {
     type: Sequelize.STRING,
     references: {
       model: User,
-      key: User.username,
-      deferrable: Deferrable.INITIALLY_IMMEDIATE,
+      key: "username",
     },
     allowNull: false,
   },
@@ -23,11 +22,10 @@ const Review = db.define("reviews", {
     type: Sequelize.INTEGER,
     references: {
       model: Product,
-      key: Product.id,
-      deferrable: Deferrable.INITIALLY_IMMEDIATE,
+      key: "id",
     },
+    allowNull: false,
   },
-  allowNull: false,
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -47,11 +45,3 @@ const Review = db.define("reviews", {
 });
 
 module.exports = Review;
-/*
-id: req.body.id,
-owner_id: req.body.owner_id,
-title: req.body.title,
-content: req.body.content,
-rating: req.body.rating,
-recommend: req.body.recommend
-*/

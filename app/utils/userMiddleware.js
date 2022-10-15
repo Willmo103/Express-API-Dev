@@ -1,7 +1,7 @@
 const User = require("../models/users");
 const utils = require("../utils/utils");
 
-exports.checkUserNull = async (req, res) => {
+exports.checkUserNull = async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     if (!user) {
@@ -10,15 +10,16 @@ exports.checkUserNull = async (req, res) => {
         reason: `user with id: ${req.params.id} does not exist.`,
       });
     }
-    return;
+    next;
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
-exports.userVerifyExists = async (req, res) => {
+exports.userVerifyExists = async (req, res, next) => {
   try {
     const user = await User.findOne({
-      where: { name: req.body.name },
+      where: { email: req.body.email },
     });
     if (user) {
       return res.status(409).json({
@@ -26,31 +27,36 @@ exports.userVerifyExists = async (req, res) => {
         reason: `user with id: ${req.body.name} already exists.`,
       });
     }
-    return;
+    next;
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
 
-exports.buildNewUserModel = async (req, res) => {
+exports.buildNewUserModel = async (req, res, next) => {
   try {
-    const hashedPassword = await utils.hashPassword(req, res);
+    await utils.hashPassword(req, res, next);
     const USER_MODEL = {
       username: req.body.username,
       email: req.body.email,
-      password: hashedPassword,
+      password: req.body.password,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       address: req.body.address,
       shippingAddress: req.body.shippingAddress,
+      bio: req.body.bio,
+      subtitle: req.body.subtitle,
     };
-    return USER_MODEL;
+    req.body["userModel"] = USER_MODEL;
+    next();
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
 
-exports.getUserTokenId = async (req, res) => {
+exports.getUserTokenId = async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
@@ -59,11 +65,12 @@ exports.getUserTokenId = async (req, res) => {
     });
     return user.id;
   } catch (error) {
+    console.log(error);
     res.send(500).json(error);
   }
 };
 
-exports.getUsernameFromId = async (req, res) => {
+exports.getUsernameFromId = async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
@@ -72,6 +79,7 @@ exports.getUsernameFromId = async (req, res) => {
     });
     return user.username;
   } catch (error) {
+    console.log(error);
     res.send(500).json(error);
   }
 };

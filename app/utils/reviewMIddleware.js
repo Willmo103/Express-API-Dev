@@ -1,6 +1,6 @@
 const Review = require("../models/reviews");
 
-exports.checkReviewNull = async (req, res) => {
+exports.checkReviewNull = async (req, res, next) => {
   try {
     const review = await Review.findByPk(req.params.id);
     if (!review) {
@@ -9,15 +9,15 @@ exports.checkReviewNull = async (req, res) => {
         reason: `review with id: ${req.params.id} does not exist.`,
       });
     }
-    return;
+    next;
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
 
-exports.buildReviewModel = async (req, res) => {
+exports.buildReviewModel = (req, res) => {
   try {
-    const owner = req.user.name;
     const REVIEW_MODEL = {
       id: req.body.id,
       owner: req.user.name,
@@ -28,11 +28,12 @@ exports.buildReviewModel = async (req, res) => {
     };
     return REVIEW_MODEL;
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
 
-exports.reviewVerifyExists = async (req, res) => {
+exports.reviewVerifyExists = async (req, res, next) => {
   try {
     const review = await Review.findOne({
       where: { name: req.body.name },
@@ -43,8 +44,9 @@ exports.reviewVerifyExists = async (req, res) => {
         reason: `review with id: ${req.body.name} already exists.`,
       });
     }
-    return;
+    next;
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };

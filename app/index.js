@@ -2,24 +2,42 @@ const express = require("express");
 const morgan = require("morgan");
 const sequelize = require("./utils/database");
 
+//----Initialize App
 const app = express();
 
+//----Config
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan("combined"));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET", "PUT", "POST", "DELETE");
   next();
 });
-app.use(morgan("common"));
-app.use("/dev", require("./routes/dev"));
-app.use("/login", require("./routes/login"));
-app.use("/users", require("./routes/users"));
-app.use("/reviews", require("./routes/reviews"));
-app.use("/products", require("./routes/products"));
-app.use("/admin/users", require("./routes/admin/users"));
-app.use("/admin/reviews", require("./routes/admin/reviews"));
-app.use("/admin/products", require("./routes/admin/products"));
+
+//-----API
+//
+//-----PUBLIC ROUTES
+//
+//-----Dev version
+app.use("/dev", require("./routes/devRouter"));
+//-----Login
+app.use("/login", require("./routes/loginRouter"));
+//------Users/Reviews/Saved
+app.use("/users", require("./routes/usersRouter"));
+//-----Products
+app.use("/products", require("./routes/productsRouter"));
+//
+//-----RESTRICTED ROUTES
+//
+//-----ADMIN User endpoints
+app.use("/admin/users", require("./routes/admin/usersRouterAdmin"));
+//-----ADMIN Reviews endpoints
+app.use("/admin/reviews", require("./routes/admin/reviewsRouterAdmin"));
+//-----Admin Products endpoints
+app.use("/admin/products", require("./routes/admin/productsRouterAdmin"));
+//
+//
 
 // function to creates new tables on startup
 (async () => {

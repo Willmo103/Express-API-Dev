@@ -1,6 +1,6 @@
-const reviewController = require("../controllers/reviews");
-const userController = require("../controllers/users");
-const saveController = require("../controllers/saved");
+const reviewController = require("../controllers/reviewsController");
+const userController = require("../controllers/usersController");
+const saveController = require("../controllers/savedController");
 const router = require("express").Router();
 const oauth = require("../utils/0auth2").authorize;
 
@@ -10,7 +10,7 @@ router
   //////// user gets all their own info */
   .get("/:id", oauth, userController.getOne)
   //////// create a user
-  .post("/", userController.createOne)
+  .post("/", userController.createOne())
   //////// user updates their own info
   .put("/:id", oauth, userController.updateOne)
   //////// user deletes their account
@@ -24,11 +24,11 @@ router
   //////// get a single review by id
   .get("/reviews/:id", reviewController.getOne)
   //////// user cerates a review
-  .post("/reviews", oauth, createOne)
+  .post("/reviews", oauth, reviewController.createOne)
   //////// user updates a review by id
-  .put("/reviews/:id", oauth, updateOne)
+  .put("/reviews/:id", oauth, reviewController.updateOne)
   //////// user deletes a review by id
-  .delete("/reviews/:id", oauth, deleteOne)
+  .delete("/reviews/:id", oauth, reviewController.deleteOne)
 
   //------------SAVED PRODUCTS:
   //////// user gets all their saved products

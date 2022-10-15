@@ -2,7 +2,7 @@ const {
   createOne,
   updateOne,
   deleteOne,
-} = require("../../controllers/admin/products");
+} = require("../../controllers/admin/productsControllerAdmin");
 const router = require("express").Router();
 
 //CUD
