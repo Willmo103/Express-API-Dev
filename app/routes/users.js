@@ -1,12 +1,17 @@
-const controller = require("../controllers/users");
+const {
+  getOne,
+  createOne,
+  updateOne,
+  deleteOne,
+} = require("../controllers/users");
 const router = require("express").Router();
+const oauth = require("../utils/0auth2").authorize;
 
 //CRUD
 router
-  .get("/", controller.getAll)
-  .get("/:id", controller.getOne)
-  .post("/", controller.createOne)
-  .put("/:id", controller.updateOne)
-  .delete("/:id", controller.deleteOne);
+  .get("/:id", oauth, getOne)
+  .post("/", createOne)
+  .put("/:id", oauth, updateOne)
+  .delete("/:id", oauth, deleteOne);
 
 module.exports = router;

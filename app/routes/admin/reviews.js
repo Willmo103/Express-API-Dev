@@ -1,7 +1,7 @@
 // TODO: set up routes for the admin reviews
-const controller = require("../../controllers/admin/reviews");
+const { getAll, deleteOne } = require("../../controllers/admin/reviews");
 const router = require("express").Router();
 
-router.get("/", controller.getAll).delete("/:id", controller.deleteOne);
+router.get("/", getAll).delete("/:id", deleteOne);
 
 module.exports = router;

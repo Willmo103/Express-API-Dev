@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../utils/database");
 const User = require("./users");
+const Product = require("./products");
 
 const Review = db.define("reviews", {
   id: {
@@ -9,14 +10,24 @@ const Review = db.define("reviews", {
     allowNull: false,
     primaryKey: true,
   },
-  owner_id: {
-    type: DataTypes.INTEGER,
+  owner: {
+    type: Sequelize.STRING,
     references: {
       model: User,
-      key: "id",
+      key: User.username,
+      deferrable: Deferrable.INITIALLY_IMMEDIATE,
+    },
+    allowNull: false,
+  },
+  subject: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Product,
+      key: Product.id,
       deferrable: Deferrable.INITIALLY_IMMEDIATE,
     },
   },
+  allowNull: false,
   title: {
     type: Sequelize.STRING,
     allowNull: false,

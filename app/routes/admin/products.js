@@ -1,10 +1,11 @@
-const controller = require("../../controllers/admin/products");
+const {
+  createOne,
+  updateOne,
+  deleteOne,
+} = require("../../controllers/admin/products");
 const router = require("express").Router();
 
 //CUD
-router
-  .post("/", controller.createOne)
-  .put("/:id", controller.updateOne)
-  .delete("/:id", controller.deleteOne);
+router.post("/", createOne).put("/:id", updateOne).delete("/:id", deleteOne);
 
 module.exports = router;

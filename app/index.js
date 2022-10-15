@@ -13,9 +13,11 @@ app.use((req, res, next) => {
 });
 app.use(morgan("common"));
 app.use("/dev", require("./routes/dev"));
+app.use("/login", require("./routes/login"));
 app.use("/users", require("./routes/users"));
 app.use("/reviews", require("./routes/reviews"));
 app.use("/products", require("./routes/products"));
+app.use("/admin/users", require("./routes/admin/users"));
 app.use("/admin/reviews", require("./routes/admin/reviews"));
 app.use("/admin/products", require("./routes/admin/products"));
 

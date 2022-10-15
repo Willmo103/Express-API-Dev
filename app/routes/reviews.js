@@ -1,11 +1,18 @@
-const controller = require("../controllers/reviews");
+const {
+  getOne,
+  createOne,
+  updateOne,
+  deleteOne,
+  getAll,
+} = require("../controllers/reviews");
 const router = require("express").Router();
+const oauth = require("../utils/0auth2").authorize;
 
 router
-  .get("/", controller.getAll)
-  .get("/:id", controller.getOne)
-  .post("/", controller.createOne)
-  .put("/:id", controller.updateOne)
-  .delete("/:id", controller.deleteOne);
+  .get("/", oauth, getAll)
+  .get("/:id", getOne)
+  .post("/", oauth, createOne)
+  .put("/:id", oauth, updateOne)
+  .delete("/:id", oauth, deleteOne);
 
 module.exports = router;

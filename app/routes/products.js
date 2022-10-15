@@ -1,7 +1,7 @@
-const controller = require("../controllers/products");
+const { getOne, getAll } = require("../controllers/products");
 const router = require("express").Router();
 
 //R
-router.get("/", controller.getAll).get("/:id", controller.getOne);
+router.get("/", getAll).get("/:id", getOne);
 
 module.exports = router;

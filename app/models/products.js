@@ -17,6 +17,10 @@ const Product = db.define("products", {
     type: Sequelize.DECIMAL(6, 2),
     allowNull: false,
   },
+  salePrice: {
+    type: Sequelize.DECIMAL(6, 2),
+    allowNull: true,
+  },
   cost: {
     type: Sequelize.DECIMAL(6, 2),
     allowNull: false,

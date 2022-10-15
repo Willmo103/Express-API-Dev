@@ -16,6 +16,7 @@ const User = db.define("users", {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   },
   password: {
     type: Sequelize.STRING,
@@ -37,9 +38,14 @@ const User = db.define("users", {
     type: Sequelize.STRING,
     allowNull: true,
   },
+  bio: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  subtitle: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
 });
 
-// TODO: add bio field
-// TODO: setup reviews Foreign key for Reviews
-// TODO: add a field for a subtitle section
 module.exports = User;

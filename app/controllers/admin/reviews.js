@@ -14,7 +14,7 @@ exports.deleteOne = async (req, res, next) => {
     const review = await Review.findByPk(req.params.id);
     if (!review) {
       return res.status(404).json({
-        status: "failed",
+        status: "404 - NOT FOUND",
         reason: `review with id: ${req.params.id} does not exist.`,
       });
     }
