@@ -1,43 +1,57 @@
-const reviewController = require("../controllers/reviewsController");
-const userController = require("../controllers/usersController");
-const saveController = require("../controllers/savedController");
-const router = require("express").Router();
+//Review Controller Imports
+const {
+  getAllOwnReviews,
+  getAllReviewsById,
+  updateOneReview,
+  deleteOneReview,
+} = require("../controllers/reviewsController");
+// User controller Imports
+const {
+  getSelf,
+  getOneUser,
+  createOneUser,
+  updateOneUser,
+  deleteOneUser,
+} = require("../controllers/usersController");
+// Save Controller Imports
+const {
+  getAllByUserId,
+  userGetAllOwn,
+  deleteOneSave,
+} = require("../controllers/savedController");
 const oauth = require("../utils/0auth2").authorize;
 
-//CRUD
+// Initialize Router
+const router = require("express").Router();
+
+//PATH: .../users...
 router
   //-----------USERS:
+  //////// valid user gets their own info
+  .get("/", oauth, getSelf)
   //////// user gets all their own info */
-  .get("/:id", oauth, userController.getOne)
+  .get("/:id", oauth, getOneUser)
   //////// create a user
-  .post("/", userController.createOne())
+  .post("/", createOneUser)
   //////// user updates their own info
-  .put("/:id", oauth, userController.updateOne)
+  .put("/:id", oauth, updateOneUser)
   //////// user deletes their account
-  .delete("/:id", oauth, userController.deleteOne)
+  .delete("/:id", oauth, deleteOneUser)
 
   //-----------REVIEWS:
   //////// user gets all their own reviews
-  .get("/reviews/", oauth, reviewController.getAllOwn)
+  .get("/reviews", oauth, getAllOwnReviews)
   //////// get all of a users reviews
-  .get("/:id/reviews", oauth, reviewController.getAllById)
-  //////// get a single review by id
-  .get("/reviews/:id", reviewController.getOne)
-  //////// user cerates a review
-  .post("/reviews", oauth, reviewController.createOne)
+  .get("/:id/reviews", oauth, getAllReviewsById)
   //////// user updates a review by id
-  .put("/reviews/:id", oauth, reviewController.updateOne)
+  .put("/reviews/:id", oauth, updateOneReview)
   //////// user deletes a review by id
-  .delete("/reviews/:id", oauth, reviewController.deleteOne)
+  .delete("/reviews/:id", oauth, deleteOneReview)
 
   //------------SAVED PRODUCTS:
-  //////// user gets all their saved products
-  .get("/saved", oauth, saveController.userGetAllOwn)
   //////// get all saved by id
-  .get(":id/saved", oauth, saveController.getAllByUserId)
+  .get("/:id/saved", oauth, getAllByUserId)
   ////////
-  .put("/saved", oauth, saveController.saveOne)
-  ////////
-  .delete("/saved", oauth, saveController.deleteOne);
+  .delete("/saved/:id", oauth, deleteOneSave);
 ////////
 module.exports = router;

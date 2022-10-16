@@ -1,8 +1,8 @@
 const { compare, hash } = require("bcrypt");
 
-exports.checkHashedPassword = async (req, res, user) => {
+exports.checkHashedPassword = async (reqPassword, storedPassword) => {
   try {
-    const validPassword = await compare(req.body.password, user.password);
+    const validPassword = await compare(reqPassword, storedPassword);
     return validPassword;
   } catch (error) {
     console.log(error);
@@ -10,11 +10,10 @@ exports.checkHashedPassword = async (req, res, user) => {
   }
 };
 
-exports.hashPassword = async (req, res, next) => {
+exports.hashPassword = async (password) => {
   try {
-    const encryptedPassword = await hash(req.body.password, 10);
-    req.body.password = encryptedPassword;
-    next();
+    const encryptedPassword = await hash(password, 10);
+    return encryptedPassword;
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);

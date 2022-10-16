@@ -1,98 +1,78 @@
 const User = require("../models/users");
 const utils = require("../utils/utils");
 
-exports.checkUserNull = async (req, res, next) => {
+exports.checkUserNull = async (id = 0) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(id);
     if (!user) {
-      return res.status(404).json({
-        status: "404 - NOT FOUND",
-        reason: `user with id: ${req.params.id} does not exist.`,
-      });
+      return false;
     }
-    next;
+    return true;
   } catch (error) {
     console.log(error);
-    return res.status(500).json(error);
+    return;
   }
 };
-exports.userVerifyExists = async (req, res, next) => {
+exports.userVerifyExists = async (email) => {
   try {
     const user = await User.findOne({
-      where: { email: req.body.email },
+      where: { email: email },
     });
     if (user) {
-      return res.status(409).json({
-        status: "409 - CONFLICT",
-        reason: `user with id: ${req.body.name} already exists.`,
-      });
+      return false;
     }
-    next;
+    return true;
   } catch (error) {
     console.log(error);
-    return res.status(500).json(error);
+    return;
   }
 };
 
-exports.buildNewUserModel = async (req, res, next) => {
+exports.buildNewUserModel = async (body = {}) => {
   try {
-    await utils.hashPassword(req, res, next);
+    const hashed = await utils.hashPassword(body.password);
     const USER_MODEL = {
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      address: req.body.address,
-      shippingAddress: req.body.shippingAddress,
-      bio: req.body.bio,
-      subtitle: req.body.subtitle,
+      username: body.username,
+      email: body.email,
+      password: hashed,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      address: body.address,
+      shippingAddress: body.shippingAddress,
+      bio: body.bio,
+      subtitle: body.subtitle,
     };
-    req.body["userModel"] = USER_MODEL;
-    next();
+    return USER_MODEL;
   } catch (error) {
     console.log(error);
-    return res.status(500).json(error);
+    return;
   }
 };
 
-exports.getUserTokenId = async (req, res, next) => {
+exports.getUserTokenId = async (username) => {
   try {
     const user = await User.findOne({
       where: {
-        username: req.user.name,
+        username: username,
       },
     });
     return user.id;
   } catch (error) {
     console.log(error);
-    res.send(500).json(error);
+    return;
   }
 };
 
-exports.getUsernameFromId = async (req, res, next) => {
+exports.getUsernameFromId = async (id) => {
   try {
     const user = await User.findOne({
       where: {
-        id: req.params.id,
+        id: id,
       },
     });
     return user.username;
   } catch (error) {
     console.log(error);
-    res.send(500).json(error);
+    return;
   }
 };
-
-// exports.getUserIdFromPath = async (req, rex){
-//   try {
-//     const user = await User.findOne({
-//       where: {
-//         : req.user.name,
-//       },
-//     });
-//     return user.id;
-//   } catch (error) {
-//     res.send(500).json(error);
-//   }
-// }

@@ -1,5 +1,5 @@
-const {getAll, getOne} = require("../controllers/saved")
-const router = require('express').Router()
-const auth = require('../utils/0auth2').authorize
+const router = require("express").Router();
+const { getAllOwn } = require("../controllers/savedController");
+const oauth = require("../utils/0auth2").authorize;
 
-router.get("/reviews", auth, getOne).get("/:id/reviews", getAll).post("/reviews", auth, saveOne)
+router.get("/", oauth, getAllOwn);

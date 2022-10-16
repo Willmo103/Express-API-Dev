@@ -1,0 +1,443 @@
+const updatedProducts = [
+  {
+    name: "Pello",
+    price: 74.99,
+    salesPrice: 60,
+    cost: 45,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/pello-armchair-holmby-natural__0841137_pe600889_s5.jpg?f=xxs",
+    description:
+      "Comfy seating throughout the home gives a relaxed feel – and with airy PELLO armchair you can easily create your comfort zones everywhere. The secrets are good back support and a slightly resilient frame!",
+    quantity: 32,
+  },
+  {
+    name: "Tobias",
+    price: 105,
+    salesPrice: 84,
+    cost: 63,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/tobias-chair-brown-red-chrome-plated__1126419_pe875739_s5.jpg?f=s",
+    description:
+      "A transparent chair that mirrors its surroundings. It picks up the colors of the room and appears to be floating. And because there’s flexibility in the seat, you may feel like you are floating too.",
+    quantity: 12,
+  },
+  {
+    name: "Linneback",
+    price: 64.99,
+    salesPrice: 52,
+    cost: 39,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/linnebaeck-chair-orrsta-olive-green__0933454_pe791910_s5.jpg?f=s",
+    description:
+      "Beautiful simplicity and a casual style. This flexible, versatile easy chair with an airy design adds a visual calmness to the room, while supporting both an active and a relaxed life at home.",
+    quantity: 18,
+  },
+  {
+    name: "Nolmyra",
+    price: 64.99,
+    salesPrice: 52,
+    cost: 39,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/nolmyra-chair-black-black__0169629_pe323574_s5.jpg?f=s",
+    description:
+      "NOLMYRA easy chair re-imagines comfort with mesh fabric stretched over the frame, making the need for foam unnecessary. The result is an elegantly engineered lounge chair at a low price.",
+    quantity: 55,
+  },
+  {
+    name: "LAGKAPTEN",
+    price: 165,
+    salesPrice: 132,
+    cost: 99,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white-black-brown__0977484_pe813613_s5.jpg?f=s",
+    description:
+      "Limited space doesn’t mean you have to say no to studying or working from home. This desk takes up little floor space yet still has a drawer unit where you can store papers and other important items.",
+    quantity: 30,
+  },
+  {
+    name: "Malvakt",
+    price: 175,
+    salesPrice: 140,
+    cost: 105,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/malvakt-alex-desk-black-white__1032042_pe836750_s5.jpg?f=s",
+    description:
+      "Mix and match your choice of table top and legs – or choose this ready-made combination. Strong and light-weight, made with a technique that uses less raw materials, reducing the impact on the environment.",
+    quantity: 46,
+  },
+  {
+    name: "Millberget",
+    price: 119,
+    salesPrice: 95,
+    cost: 71,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/millberget-swivel-chair-murum-dark-brown__1020143_pe831800_s5.jpg?f=s",
+    description:
+      "MILLBERGET swivel chair offers comfort and function when you’re working at the desk. It’s also elegant, generous and blends easily with your living room or bedroom decor.",
+    quantity: 10,
+  },
+  {
+    name: "Malm",
+    price: 259,
+    salesPrice: 207,
+    cost: 155,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/malm-desk-black-brown__0735973_pe740307_s5.jpg?f=s",
+    description:
+      "A clean design that’s just as beautiful on all sides – place it free-standing in the room or against a wall with cables neatly hidden inside. Use with other MALM products in the series for a unified look.",
+    quantity: 36,
+  },
+  {
+    name: "knarrevik",
+    price: 16,
+    salesPrice: 13,
+    cost: 10,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/knarrevik-nightstand-black__0578634_pe669464_s5.jpg?f=s",
+    description:
+      "This simple black nightstand is a little gem to have at home. Place it next to your bed or sofa, use it in small spaces or easily move it around for a more flexible home!",
+    quantity: 20,
+  },
+  {
+    name: "gursken",
+    price: 25,
+    salesPrice: 20,
+    cost: 15,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/gursken-nightstand-light-beige__0923962_pe788458_s5.jpg?f=s",
+    description:
+      "GURSKEN bedside table has a simple, clean design – perfect for furnishing an apartment or guest room quickly and easily. A great match with the bed, chest of drawers and wardrobe in the same series!",
+    quantity: 1,
+  },
+  {
+    name: "eket",
+    price: 99,
+    salesPrice: 79,
+    cost: 59,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/eket-storage-combination-with-legs-white-light-gray-wood__0915070_pe784543_s5.jpg?f=s",
+    description:
+      "With the EKET series you can build your storage big, small, colorful or discreet to either display or hide your things. And if your space and needs change, you can easily change your EKET solution too.",
+    quantity: 35,
+  },
+  {
+    name: "linanäs",
+    price: 349,
+    salesPrice: 279,
+    cost: 209,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/linanaes-sofa-vissle-dark-gray__1013898_pe829450_s5.jpg?f=s",
+    description:
+      "This cover is made from Vissle fabric in polyester, which is dope-dyed. It’s a durable material with a smooth weave and a nice two-tone effect.",
+    quantity: 12,
+  },
+  {
+    name: "lack",
+    price: 45,
+    salesPrice: 36,
+    cost: 27,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/lack-coffee-table-black-brown__57540_pe163122_s5.jpg?f=s",
+    description:
+      "LACK table in black-brown is easy to match with other furnishings. The honeycomb structured paper filling construction adds strength to the table while keeping it lightweight so it´s easy to move around.",
+    quantity: 38,
+  },
+  {
+    name: "lunnarp",
+    price: 75,
+    salesPrice: 60,
+    cost: 45,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/lunnarp-coffee-table-brown__0593613_pe675310_s5.jpg?f=s",
+    description:
+      "The sturdy and stable LUNNARP coffee table has practical storage under the tabletop. Perfect when you want to have magazines, remote controls and tablets close at hand when you relax on the sofa.",
+    quantity: 9,
+  },
+  {
+    name: "listerby",
+    price: 220,
+    salesPrice: 176,
+    cost: 132,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/listerby-coffee-table-dark-brown-stained-oak-veneer__1022546_pe832804_s5.jpg?f=s",
+    description:
+      "This robust table lasts a long time since lacquer protects the durable oak and preserves the natural wood feel. Sturdy and with a genuine character – year after year.",
+    quantity: 2,
+  },
+  {
+    name: "stockholm",
+    price: 330,
+    salesPrice: 264,
+    cost: 198,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/stockholm-coffee-table-walnut-veneer__0181245_pe332924_s5.jpg?f=s",
+    description:
+      "A tribute to modern Scandinavian design. This stylish table with an oval table top made of walnut veneer has an elegant and warm expression. Keep magazines, books and other small items on the shelf.",
+    quantity: 39,
+  },
+  {
+    name: "arkelstorp",
+    price: 250,
+    salesPrice: 200,
+    cost: 150,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/arkelstorp-coffee-table-black__0260729_pe404586_s5.jpg?f=s",
+    description:
+      "ARKELSTORP coffee table has 2 drop leaves that allow you to easily adjust the size of the table. It also has a drawer for small items and a shelf where you can put things like magazines or tablets.",
+    quantity: 18,
+  },
+  {
+    name: "idanäs",
+    price: 300,
+    salesPrice: 240,
+    cost: 180,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/idanaes-4-drawer-chest-white__0898851_pe782663_s5.jpg?f=s",
+    description:
+      "IDANÄS series combines timeless design with modern functionality. The high chest of drawers has lots of storage space and spacious drawers of different depths. Perfect for your socks and winter woollies.",
+    quantity: 9,
+  },
+  {
+    name: "hemnes",
+    price: 250,
+    salesPrice: 200,
+    cost: 150,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/hemnes-3-drawer-chest-dark-gray-stained__0519826_pe641789_s5.jpg?f=s",
+    description:
+      "Lasting beauty with wood from more sustainable sources. A traditional look in a warm finish combined with modern functionality like quiet, smooth-running drawers. Psst! Remember to anchor it to a wall.",
+    quantity: 32,
+  },
+  {
+    name: "lommarp",
+    price: 470,
+    salesPrice: 376,
+    cost: 282,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/lommarp-cabinet-with-glass-doors-black__1017461_pe830861_s5.jpg?f=s",
+    description:
+      "This storage series is inspired by traditional carpentry, combining style and functions for today's urban lifestyles. Use it wherever you need storage ― and mix with other furniture for a personal look.",
+    quantity: 21,
+  },
+  {
+    name: "billy",
+    price: 460,
+    salesPrice: 368,
+    cost: 276,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/billy-bookcase-dark-blue__0503878_pe632961_s5.jpg?f=s",
+    description:
+      "It is estimated that every five seconds, one BILLY bookcase is sold somewhere in the world. Pretty impressive considering we launched BILLY in 1979. It’s the booklovers choice that never goes out of style.",
+    quantity: 39,
+  },
+  {
+    name: "brimnes",
+    price: 529,
+    salesPrice: 423,
+    cost: 317,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/brimnes-bed-frame-with-storage-headboard-black-luroey__1151053_pe884765_s5.jpg?f=s",
+    description:
+      "A bed frame with hidden storage in several places – perfect if you live in a small space. The BRIMNES series has several smart solutions that help you save space.",
+    quantity: 18,
+  },
+  {
+    name: "sagstua",
+    price: 219,
+    salesPrice: 175,
+    cost: 131,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/sagstua-bed-frame-black-luroey__0783215_pe761511_s5.jpg?f=s",
+    description:
+      "A classic bed frame with a brass twist. The curved headboard and brass-colored details soften the sturdy steel. Dressed with your favorite linens, it becomes a statement piece and your own personal haven.",
+    quantity: 18,
+  },
+  {
+    name: "tarva",
+    price: 189,
+    salesPrice: 151,
+    cost: 113,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/tarva-bed-frame-pine-luroey__0637611_pe698421_s5.jpg?f=s",
+    description:
+      "TARVA bed frame is a modern example of Scandinavian furniture tradition – a simple design and untreated wood. A timeless expression mixes nicely with a variety of other styles and furniture.",
+    quantity: 1,
+  },
+  {
+    name: "bestå",
+    price: 263,
+    salesPrice: 210,
+    cost: 158,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/besta-tv-unit-black-brown-lappviken-black-brown__0334631_pe527586_s5.jpg?f=s",
+    description:
+      "It’s not only the TV that’s smart! BESTÅ TV units combine contemporary good looks with practical function. You get lots of storage space and relief from cables that tend to get messy and gather dust.",
+    quantity: 20,
+  },
+  {
+    name: "kallax",
+    price: 90,
+    salesPrice: 72,
+    cost: 54,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/kallax-shelving-unit-with-underframe-white-stained-oak-effect-white__1041447_pe841029_s5.jpg?f=s",
+    description:
+      "The KALLAX series adapts to taste, space, needs and budget. Smooth surfaces and rounded corners give a feel of quality and the underframe creates an airy look. Personalize with inserts and boxes.",
+    quantity: 12,
+  },
+  {
+    name: "utespelare",
+    price: 229,
+    salesPrice: 183,
+    cost: 137,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/utespelare-gaming-desk-light-gray__0998214_pe822969_s5.jpg?f=s",
+    description:
+      "Raise the large, sturdy UTESPELARE gaming desk to a height that optimally suits you. The metal mesh at the back of the table top allows air to circulate and cool your PC when the match heats up.",
+    quantity: 42,
+  },
+  {
+    name: "fredde",
+    price: 279,
+    salesPrice: 223,
+    cost: 167,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/fredde-gaming-desk-black__0994049_pe820836_s5.jpg?f=s",
+    description:
+      "How do you make the perfect gaming station? That's what we set out to do with FREDDE desk by researching competitive gaming and enlisting a gamer designer of our own.",
+    quantity: 36,
+  },
+  {
+    name: "matchspel",
+    price: 568,
+    salesPrice: 454,
+    cost: 341,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/fredde-matchspel-gaming-desk-and-chair-black__0985657_pe816724_s5.jpg?f=s",
+    description:
+      "Hang the small shelves inside or outside the side panels, depending on your needs.",
+    quantity: 30,
+  },
+  {
+    name: "micke",
+    price: 90,
+    salesPrice: 72,
+    cost: 54,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/micke-drawer-unit-drop-file-storage-black-brown__0172835_pe327022_s5.jpg?f=s",
+    description:
+      "A practical drawer unit with clean lines, drop-file storage and pull-out stops. The unit also has a finished back, so you can place it where you like in the room – and easily move it thanks to the castors.",
+    quantity: 21,
+  },
+  {
+    name: "malm",
+    price: 229,
+    salesPrice: 183,
+    cost: 137,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/malm-desk-with-pull-out-panel-black-brown__0735977_pe740311_s5.jpg?f=s",
+    description:
+      "A clean design that’s just as nice on all sides – place it freestanding in the room or against a wall with cables neatly hidden inside. Mount the extra pull-out work surface to the left or right side.",
+    quantity: 5,
+  },
+  {
+    name: "råskog",
+    price: 40,
+    salesPrice: 32,
+    cost: 24,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/raskog-utility-cart-white__0503386_pe632627_s5.jpg?f=s",
+    description:
+      "This utility cart fits in the smallest of spaces and can be moved to wherever you need it. Use it as extra storage for all your kitchen utensils, desk accessories or for gloves, keys and mobile phones.",
+    quantity: 10,
+  },
+  {
+    name: "vesken",
+    price: 15,
+    salesPrice: 12,
+    cost: 9,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/vesken-cart-black__0832005_pe777545_s5.jpg?f=s",
+    description:
+      "It fits in the smallest of bathrooms, but there’s plenty of space on the shelves for all your toiletries from shampoo bottles to soap and small items.",
+    quantity: 44,
+  },
+  {
+    name: "bror",
+    price: 199,
+    salesPrice: 159,
+    cost: 119,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/bror-utility-cart-black-pine-plywood__0636685_pe697973_s5.jpg?f=s",
+    description:
+      "Heavy-duty, our way – a sturdy storage system that withstands moisture, dirt and heavy loads. Also easy to assemble, complete as needed and fits everywhere thanks to its clean design.",
+    quantity: 22,
+  },
+  {
+    name: "vadholma",
+    price: 694,
+    salesPrice: 555,
+    cost: 416,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/vadholma-kitchen-island-with-rack-black-oak__0605057_pe681596_s5.jpg?f=s",
+    description:
+      "Gather around the kitchen island! VADHOLMA is the home’s given meeting point and perfect when you cook together. Plenty of island and rack storage ‒ and the butcher block gives you a robust workspace.",
+    quantity: 21,
+  },
+  {
+    name: "lennart",
+    price: 20,
+    salesPrice: 16,
+    cost: 12,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/lennart-drawer-unit-white__0395412_pe564513_s5.jpg?f=s",
+    description:
+      "A simple, slim and practical drawer unit that you can fit almost anywhere. Transparent drawers give you a good overview of what you store – and the drawer unit is also easy to move thanks to the castors.",
+    quantity: 32,
+  },
+  {
+    name: "trotten",
+    price: 169,
+    salesPrice: 135,
+    cost: 101,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/trotten-utility-cart-white__1012660_pe828953_s5.jpg?f=s",
+    description:
+      "Trolley with room for all your important work things – from folders and notepads to water and coffee. A practical extension of your desk that you can also easily bring to meetings or workshops.",
+    quantity: 11,
+  },
+  {
+    name: "risatorp",
+    price: 70,
+    salesPrice: 56,
+    cost: 42,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/risatorp-utility-cart-white__0736868_pe740789_s5.jpg?f=s",
+    description:
+      "Perfect for storing those fruits and vegetables that are happier outside the refrigerator. The steel mesh ventilates so food stays fresh longer. Also handy as extra storage in the hallway, bedroom or home office.",
+    quantity: 31,
+  },
+  {
+    name: "docksta",
+    price: 259,
+    salesPrice: 207,
+    cost: 155,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/docksta-bar-table-black-black__0979402_pe814520_s5.jpg?f=s",
+    description:
+      "A round table with soft edges gives a relaxed impression in a room.",
+    quantity: 23,
+  },
+  {
+    name: "jokkmokk",
+    price: 299,
+    salesPrice: 239,
+    cost: 179,
+    imageUrl:
+      "https://www.ikea.com/us/en/images/products/jokkmokk-bar-table-and-4-bar-stools-black-brown__0559262_pe661859_s5.jpg?f=s",
+    description: "Solid pine; a natural material that ages beautifully.",
+    quantity: 30,
+  },
+];
+
+module.exports = updatedProducts;

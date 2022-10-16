@@ -45,3 +45,4 @@ const Review = db.define("reviews", {
 });
 
 module.exports = Review;
+// fix broken ability for users to submit multiple reviews for the same product

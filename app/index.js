@@ -1,3 +1,4 @@
+// Imports
 const express = require("express");
 const morgan = require("morgan");
 const sequelize = require("./utils/database");
@@ -8,7 +9,7 @@ const app = express();
 //----Config
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(morgan("combined"));
+app.use(morgan("dev"));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET", "PUT", "POST", "DELETE");
@@ -23,10 +24,12 @@ app.use((req, res, next) => {
 app.use("/dev", require("./routes/devRouter"));
 //-----Login
 app.use("/login", require("./routes/loginRouter"));
-//------Users/Reviews/Saved
+//-----Users
 app.use("/users", require("./routes/usersRouter"));
 //-----Products
 app.use("/products", require("./routes/productsRouter"));
+//-----Saved
+app.use("/saved", require("./routes/savedRouter"));
 //
 //-----RESTRICTED ROUTES
 //
