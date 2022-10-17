@@ -5,7 +5,6 @@ const {
 } = require("../controllers/productsController");
 // Review Controller Imports
 const {
-  getOneReview,
   createOneReview,
   getAllByProductId,
 } = require("../controllers/reviewsController");
@@ -23,8 +22,6 @@ router
   .get("/", getAllProducts)
   //////// Returns Single product by id
   .get("/:id", getOneProduct)
-  //////// Returns a single review by id
-  .get("/reviews/:id", getOneReview)
   //////// Returns all reviews for a single product by that product's id
   .get("/:id/reviews", oauth, getAllByProductId)
   //////// User cerates a review for product by it's id

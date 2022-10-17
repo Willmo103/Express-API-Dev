@@ -1,6 +1,8 @@
 const { compare } = require("bcrypt");
 const User = require("../models/users");
 const sign = require("jsonwebtoken").sign;
+const { jwtToken, badLogin, serverError } = require("../utils/status");
+
 exports.loginUser = async (req, res) => {
   try {
     //   look for either username or email in body
@@ -24,24 +26,12 @@ exports.loginUser = async (req, res) => {
           }
         );
         // return token
-        return res.status(200).json({
-          status: "200 - SUCCESS",
-          "token-type": "Bearer",
-          token: token,
-        });
+        return res.status(200).json(jwtToken(token));
       }
     } catch (error) {
-      console.log(error);
-      return res.status(400).json({
-        status: "400 - BAD REQUEST",
-        details: "Invalid credentials. Unable to login",
-      });
+      return res.status(400).json(badLogin());
     }
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      status: "500 - INTERNAL SERVER ERROR",
-      details: error,
-    });
+    return res.status(500).json(serverError(error));
   }
 };

@@ -9,7 +9,7 @@ const app = express();
 //----Config
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(morgan("dev"));
+app.use(morgan("common"));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET", "PUT", "POST", "DELETE");
@@ -20,25 +20,31 @@ app.use((req, res, next) => {
 //
 //-----PUBLIC ROUTES
 //
+//
 //-----Dev version
-app.use("/dev", require("./routes/devRouter"));
+app.use("/api/v1/dev", require("./routes/devRouter"));
 //-----Login
-app.use("/login", require("./routes/loginRouter"));
+app.use("/api/v1/login", require("./routes/loginRouter"));
 //-----Users
-app.use("/users", require("./routes/usersRouter"));
+app.use("/api/v1/users", require("./routes/usersRouter"));
 //-----Products
-app.use("/products", require("./routes/productsRouter"));
+app.use("/api/v1/products", require("./routes/productsRouter"));
+//-----Reviews
+app.use("/api/v1/reviews", require("./routes/reviewsRouter"));
 //-----Saved
-app.use("/saved", require("./routes/savedRouter"));
+app.use("/api/v1/saved", require("./routes/savedRouter"));
 //
 //-----RESTRICTED ROUTES
 //
 //-----ADMIN User endpoints
-app.use("/admin/users", require("./routes/admin/usersRouterAdmin"));
+app.use("/api/v1/admin/users", require("./routes/admin/usersRouterAdmin"));
 //-----ADMIN Reviews endpoints
-app.use("/admin/reviews", require("./routes/admin/reviewsRouterAdmin"));
+app.use("/api/v1/admin/reviews", require("./routes/admin/reviewsRouterAdmin"));
 //-----Admin Products endpoints
-app.use("/admin/products", require("./routes/admin/productsRouterAdmin"));
+app.use(
+  "/api/v1/admin/products",
+  require("./routes/admin/productsRouterAdmin")
+);
 //
 //
 

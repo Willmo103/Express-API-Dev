@@ -14,11 +14,7 @@ const {
   deleteOneUser,
 } = require("../controllers/usersController");
 // Save Controller Imports
-const {
-  getAllByUserId,
-  userGetAllOwn,
-  deleteOneSave,
-} = require("../controllers/savedController");
+const { getAllByUserId } = require("../controllers/savedController");
 const oauth = require("../utils/0auth2").authorize;
 
 // Initialize Router
@@ -39,19 +35,10 @@ router
   .delete("/:id", oauth, deleteOneUser)
 
   //-----------REVIEWS:
-  //////// user gets all their own reviews
-  .get("/reviews", oauth, getAllOwnReviews)
   //////// get all of a users reviews
   .get("/:id/reviews", oauth, getAllReviewsById)
-  //////// user updates a review by id
-  .put("/reviews/:id", oauth, updateOneReview)
-  //////// user deletes a review by id
-  .delete("/reviews/:id", oauth, deleteOneReview)
-
   //------------SAVED PRODUCTS:
   //////// get all saved by id
-  .get("/:id/saved", oauth, getAllByUserId)
-  ////////
-  .delete("/saved/:id", oauth, deleteOneSave);
-////////
+  .get("/:id/saved", oauth, getAllByUserId);
+
 module.exports = router;

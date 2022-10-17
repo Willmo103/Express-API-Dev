@@ -5,7 +5,7 @@ services:
     container_name: express_api
     image: express-api-test0.0.5
     build:
-      context: .
+      context: ./API
     ports: ["5000:5000"]
     environment:
       - EXTERNAL_PORT=5000

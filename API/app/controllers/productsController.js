@@ -1,5 +1,5 @@
 const Product = require("../models/products");
-const mw = require("../utils/productsMiddleware");
+const { serverError, notFound, success } = require("../utils/status");
 
 exports.getAllProducts = async (req, res, next) => {
   try {
@@ -8,11 +8,7 @@ exports.getAllProducts = async (req, res, next) => {
     });
     return res.status(200).json(products);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      status: "500 - INTERNAL SERVER ERROR",
-      details: error,
-    });
+    return res.status(500).json(serverError(error));
   }
 };
 
@@ -22,17 +18,12 @@ exports.getOneProduct = async (req, res, next) => {
       attributes: { exclude: ["cost", "salesPrice"] },
     });
     if (!product) {
-      return res.status(404).json({
-        status: "404 - NOT FOUND",
-        reason: `product with id: ${req.params.id} does not exist.`,
-      });
+      return res
+        .status(404)
+        .json(notFound(`product with id '${req.params.id}'`));
     }
-    return res.status(200).json(product);
+    return res.status(200).json(success(product));
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      status: "500 - INTERNAL SERVER ERROR",
-      details: error,
-    });
+    return res.status(500).json(serverError(error));
   }
 };
