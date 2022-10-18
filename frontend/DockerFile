@@ -1,8 +1,6 @@
 FROM node:14
 
-EXPOSE 5000
-
-WORKDIR /src
+EXPOSE 5050
 
 RUN npm install npm@latest -g
 
